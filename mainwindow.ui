@@ -83,6 +83,7 @@
     <property name="title">
      <string>帮助(H)</string>
     </property>
+    <addaction name="actionAbout"/>
    </widget>
    <addaction name="menu"/>
    <addaction name="menu_E"/>
@@ -398,6 +399,68 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+A</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>关于(&amp;A)</string>
+   </property>
+   <property name="toolTip">
+    <string>关于</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionLineNumber">
+   <property name="icon">
+    <iconset resource="notepad.qrc">
+     <normaloff>:/image/linenumber.svg</normaloff>:/image/linenumber.svg</iconset>
+   </property>
+   <property name="text">
+    <string>显示行号(&amp;U)</string>
+   </property>
+   <property name="toolTip">
+    <string>显示行号</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+L</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionFontColor">
+   <property name="text">
+    <string>字体颜色</string>
+   </property>
+   <property name="toolTip">
+    <string>设置字体颜色</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionBlckgroundColor">
+   <property name="text">
+    <string>编辑背景颜色</string>
+   </property>
+   <property name="toolTip">
+    <string>设置编辑器背景色</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionFontbackgroundColor">
+   <property name="text">
+    <string>字体背景色</string>
+   </property>
+   <property name="toolTip">
+    <string>字体背景色</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>
