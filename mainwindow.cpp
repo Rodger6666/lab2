@@ -6,6 +6,8 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QTextStream>
+#include <QColorDialog>
+#include <QFontDialog>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -34,6 +36,18 @@ MainWindow::MainWindow(QWidget *parent)
     ui->actionUndo->setEnabled(false);
     ui->actionCut->setEnabled(false);
     ui->actionPaste->setEnabled(false);
+
+    QPlainTextEdit::LineWrapMode mode = ui->textEdit->lineWrapMode();
+
+    if( mode == QTextEdit::NoWrap){
+        ui->textEdit->setLineWrapMode(QPlainTextEdit::WidgetWidth);
+
+        ui->actionWrap->setChecked(false);
+    }else{
+        ui->textEdit->setLineWrapMode(QPlainTextEdit::NoWrap);
+
+        ui->actionWrap->setChecked(true);
+    }
 }
 
 MainWindow::~MainWindow()
@@ -247,5 +261,55 @@ void MainWindow::on_textEdit_redoAvailable(bool b)
 void MainWindow::on_textEdit_undoAvailable(bool b)
 {
     ui->actionUndo->setEnabled(b);
+}
+
+
+void MainWindow::on_actionFontColor_triggered()
+{
+    QColor color = QColorDialog::getColor(Qt::black, this, "选择颜色");
+    if(color.isValid()){
+        ui->textEdit->setStyleSheet(QString("QPlainTextEdit {color: %1}").arg(color.name()));
+    }
+}
+
+
+void MainWindow::on_actionBlckgroundColor_triggered()
+{
+    QColor color = QColorDialog::getColor(Qt::black, this, "选择颜色");
+    if(color.isValid()){
+        ui->textEdit->setStyleSheet(QString("QPlainTextEdit {background-color: %1}").arg(color.name()));
+    }
+}
+
+
+void MainWindow::on_actionFontbackgroundColor_triggered()
+{
+
+}
+
+
+void MainWindow::on_actionWrap_triggered()
+{
+    QPlainTextEdit::LineWrapMode mode = ui->textEdit->lineWrapMode();
+
+    if( mode == QTextEdit::NoWrap){
+        ui->textEdit->setLineWrapMode(QPlainTextEdit::WidgetWidth);
+
+        ui->actionWrap->setChecked(true);
+    }else{
+        ui->textEdit->setLineWrapMode(QPlainTextEdit::NoWrap);
+
+        ui->actionWrap->setChecked(false);
+    }
+}
+
+
+void MainWindow::on_actionFont_triggered()
+{
+    bool ok =false;
+    QFont font = QFontDialog::getFont(&ok,this);
+
+    if(ok)
+        ui->textEdit->setFont(font);
 }
 
