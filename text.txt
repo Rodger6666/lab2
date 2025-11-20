@@ -1,0 +1,58 @@
+#include "searchdialog.h"
+#include "ui_searchdialog.h"
+#include <QMessageBox>
+#include <QTextCursor>
+
+SearchDialog::SearchDialog(QWidget *parent,QPlainTextEdit *textEdit):
+    QDialog(parent)
+    ,ui(new Ui::SearchDialog)
+{
+    ui->setupUi(this);
+    pTextEdit = textEdit;
+
+
+    if (pTextEdit == nullptr) {
+        QMessageBox::warning(this, "警告", "未关联文本编辑框！");
+        ui->btfindNext->setEnabled(false); // 禁用查找按钮
+    }
+}
+
+SearchDialog::~SearchDialog()
+{
+    delete ui;
+}
+
+void SearchDialog::on_btfindNext_clicked()
+{
+
+    if (pTextEdit == nullptr) return;
+
+    QString target = ui->searchText->text().trimmed();
+
+    if (target.isEmpty()) {
+        QMessageBox::information(this, "提示", "请输入要查找的内容！");
+        ui->searchText->setFocus(); // 聚焦输入框，方便用户输入
+        return;
+    }
+
+    QString text = pTextEdit->toPlainText();
+    QTextCursor c = pTextEdit->textCursor();
+    int index = -1;
+
+    index = text.indexOf(target, c.position());
+    if(index >= 0){
+        c.setPosition(index);
+        c.setPosition(index + target.length(), QTextCursor::KeepAnchor);
+        pTextEdit->setTextCursor(c);
+
+        pTextEdit->ensureCursorVisible();
+
+    } else {
+        QMessageBox::information(this, "查找结果", "未找到目标文本：" + target);
+    }
+}
+
+void SearchDialog::on_btCancel_clicked()
+{
+    accept();
+}

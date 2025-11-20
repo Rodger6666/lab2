@@ -52,6 +52,7 @@
     <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
     <addaction name="actionSaveAs"/>
+    <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menu_E">
     <property name="title">
@@ -351,6 +352,9 @@
    </property>
   </action>
   <action name="actionToolBar">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="notepad.qrc">
      <normaloff>:/image/tool.svg</normaloff>:/image/tool.svg</iconset>
@@ -366,6 +370,9 @@
    </property>
   </action>
   <action name="actionStatusBar">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="notepad.qrc">
      <normaloff>:/image/status.svg</normaloff>:/image/status.svg</iconset>
